@@ -51,6 +51,20 @@ app.get("/game/:id", (req, res) => {
     }
 })
 
+app.post('/game', (req, res) => {
+    var { title, price, year } = req.body
+
+    DB.games.push({
+        id: 2,
+        title,
+        price,
+        year
+    })
+
+    res.sendStatus(200)
+
+})
+
 app.listen(8000, () => {
     console.log('Server On!')
 })
