@@ -28,8 +28,27 @@ var DB = {
     ]
 }
 
-app.get('/', (req, res) => {
-    
+app.get('/games', (req, res) => {
+    res.statusCode = 200
+    res.json(DB.games)
+})
+
+app.get("/game/:id", (req, res) => {
+
+    if (isNaN(req.params.id)) {
+        res.sendStatus(400)
+    } else {
+        var id = parseInt(req.params.id)
+
+        var game = DB.games.find(game => game.id == id)
+
+        if (game) {
+            res.sendStatus = 200
+            res.send(game)
+        } else {
+            res.sendStatus(404)
+        }
+    }
 })
 
 app.listen(8000, () => {
